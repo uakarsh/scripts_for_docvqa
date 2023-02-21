@@ -230,7 +230,7 @@ def _check_is_max_context(doc_spans, cur_span_index, position):
 
 def convert_examples_to_features(examples,label_list, tokenizer, max_seq_length,
                                  doc_stride, max_query_length, is_training, 
-                                 pad_token_label_id=-100):
+                                 pad_token_label_id=-100, processor = None):
   """Loads a data file into a list of `InputBatch`s."""
 
     unique_id = 1000000000
