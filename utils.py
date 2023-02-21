@@ -93,7 +93,7 @@ class InputFeatures(object):
 
 # Reading a single docvqa file
 def read_docvqa_examples(input_file, is_training=True, skip_match_answers=True, base_path="./"):
-      """Read a SQuAD json file into a list of SquadExample."""
+    """Read a SQuAD json file into a list of SquadExample."""
     with open(input_file, 'r') as f:
         input_data = json.load(f)
 
@@ -191,7 +191,7 @@ def _improve_answer_span(doc_tokens, input_start, input_end, tokenizer,
 
 
 def _check_is_max_context(doc_spans, cur_span_index, position):
-      """Check if this is the 'max context' doc span for the token."""
+    """Check if this is the 'max context' doc span for the token."""
 
     # Because of the sliding window approach taken to scoring documents, a single
     # token can appear in multiple documents. E.g.
@@ -231,7 +231,7 @@ def _check_is_max_context(doc_spans, cur_span_index, position):
 def convert_examples_to_features(examples,label_list, tokenizer, max_seq_length,
                                  doc_stride, max_query_length, is_training, 
                                  pad_token_label_id=-100, processor = None):
-  """Loads a data file into a list of `InputBatch`s."""
+    """Loads a data file into a list of `InputBatch`s."""
 
     unique_id = 1000000000
     features = []
