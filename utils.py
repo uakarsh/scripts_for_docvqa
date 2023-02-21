@@ -6,6 +6,7 @@ from transformers import AutoProcessor, AutoTokenizer
 from tqdm.auto import tqdm
 import os
 import collections
+import tokenization
 
 # No tokenizer parallelism
 os.environ['TOKENIZERS_PARALLELISM'] = 'false'
