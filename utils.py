@@ -241,7 +241,7 @@ def convert_examples_to_features(examples,label_list, tokenizer, max_seq_length,
     
     img = None
     if processor is not None:
-      img = processor.feature_extractor(Image.open(example.image_id).convert("RGB"))
+      img = processor.image_processor(Image.open(example.image_id).convert("RGB"))
     query_tokens = tokenizer.tokenize(example.question_text)
     if len(query_tokens) > max_query_length:
       query_tokens = query_tokens[0:max_query_length]
