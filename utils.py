@@ -229,6 +229,19 @@ def _check_is_max_context(doc_spans, cur_span_index, position):
 
 
 
+def normalize_box(box, width, height, size=1000):
+    """
+    Takes a bounding box and normalizes it to a thousand pixels. If you notice it is
+    just like calculating percentage except takes 1000 instead of 100.
+    """
+    return [
+        int(size * (box[0] / width)),
+        int(size * (box[1] / height)),
+        int(size * (box[2] / width)),
+        int(size * (box[3] / height)),
+    ]
+    
+
 def convert_examples_to_features(examples,label_list, tokenizer, max_seq_length,
                                  doc_stride, max_query_length, is_training, 
                                  pad_token_label_id=-100, processor = None):
@@ -242,7 +255,9 @@ def convert_examples_to_features(examples,label_list, tokenizer, max_seq_length,
     
     img = None
     if processor is not None:
-      img = processor.image_processor(Image.open(example.image_id).convert("RGB"))
+      original_image = Image.open(example.image_id).convert("RGB")
+      width, height = original_image.size
+      img = processor.image_processor(original_image)
     query_tokens = tokenizer.tokenize(example.question_text)
     if len(query_tokens) > max_query_length:
       query_tokens = query_tokens[0:max_query_length]
@@ -405,6 +420,8 @@ def convert_examples_to_features(examples,label_list, tokenizer, max_seq_length,
       #  label_ids[start_position]=0
       #  label_ids[end_position]=1
 
+      ## Normalize the boxes
+      normalized_boxes_token = list(map(lambda x : normalize_box(x, img_width, img_height), boxes_tokens))
       
       feature = InputFeatures(
           unique_id=unique_id,
@@ -420,7 +437,7 @@ def convert_examples_to_features(examples,label_list, tokenizer, max_seq_length,
           start_positions=start_position,
           end_positions=end_position,
           is_impossible=example.is_impossible,
-          boxes=boxes_tokens,
+          boxes=normalized_boxes_token, ## Normalized boxes for the image
           p_mask = p_mask,
           img = img,
           image_id = example.image_id
