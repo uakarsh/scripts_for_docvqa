@@ -72,7 +72,7 @@ class InputFeatures(object):
                is_impossible=None,
                boxes=None,
                p_mask=None,
-               img=None):
+               img=None, image_id = None):
         self.unique_id = unique_id
         self.qas_id = qas_id
         self.example_index = example_index
@@ -89,6 +89,7 @@ class InputFeatures(object):
         self.boxes = boxes
         self.p_mask = p_mask
         self.img = img
+        self.image_id = image_id
 
 
 # Reading a single docvqa file
