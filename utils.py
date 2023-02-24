@@ -419,9 +419,6 @@ def convert_examples_to_features(examples,label_list, tokenizer, max_seq_length,
       #if is_training and (start_position!=0 and end_position!=0):
       #  label_ids[start_position]=0
       #  label_ids[end_position]=1
-
-      ## Normalize the boxes
-      normalized_boxes_token = list(map(lambda x : normalize_box(x, img_width, img_height), boxes_tokens))
       
       feature = InputFeatures(
           unique_id=unique_id,
@@ -437,7 +434,7 @@ def convert_examples_to_features(examples,label_list, tokenizer, max_seq_length,
           start_positions=start_position,
           end_positions=end_position,
           is_impossible=example.is_impossible,
-          boxes=normalized_boxes_token, ## Normalized boxes for the image
+          boxes=boxes_tokens, ## Boxes are already normalized, between 0 to 1000, see : https://www.kaggle.com/akarshu121/visualizing-ocrs-from-docvqa/edit, for reference
           p_mask = p_mask,
           img = img,
           image_id = example.image_id
