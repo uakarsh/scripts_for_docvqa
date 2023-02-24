@@ -422,7 +422,8 @@ def convert_examples_to_features(examples,label_list, tokenizer, max_seq_length,
           is_impossible=example.is_impossible,
           boxes=boxes_tokens,
           p_mask = p_mask,
-          img = img
+          img = img,
+          image_id = example.image_id
           )
       features.append(feature)
       '''
