@@ -61,7 +61,7 @@ def get_pred_references(output, dl, tokenizer):
                                    input_ids = dl['input_ids'].detach().cpu(), tokenizer = tokenizer)
     
     act_decode_sent = decode_for_batch(start_ps = output.start_logits.argmax(axis = -1).detach().cpu(), end_ps = output.end_logits.argmax(axis = -1).detach().cpu(), 
-                                    input_ids = sample['input_ids'].detach().cpu(), tokenizer = tokenizer)
+                                    input_ids = dl['input_ids'].detach().cpu(), tokenizer = tokenizer)
     
     
     batch_size = len(pred_decode_sent)
