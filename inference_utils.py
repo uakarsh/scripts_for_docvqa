@@ -73,7 +73,7 @@ def get_pred_references(output, dl, tokenizer):
         curr_pred = {"prediction_text" : act_decode_sent[i],
                     'id' : unique_id}
         
-        curr_ref = {"answers" : {"answer_start" : [dl['start_positions'].item()], "text" : [pred_decode_sent[i]]},
+        curr_ref = {"answers" : {"answer_start" : [dl['start_positions'][i].item()], "text" : [pred_decode_sent[i]]},
                                'id' : unique_id}
         
         predictions.append(curr_pred)
