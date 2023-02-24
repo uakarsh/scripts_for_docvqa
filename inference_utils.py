@@ -69,7 +69,7 @@ def get_pred_references(output, dl, tokenizer):
     references = []
     
     for i in range(batch_size):
-        unique_id = str(dl['unique_id'].item())
+        unique_id = str(dl['unique_id'][i].item())
         curr_pred = {"prediction_text" : act_decode_sent[i],
                     'id' : unique_id}
         
