@@ -19,7 +19,10 @@ def get_tokenizer_and_processor(model_name):
     if model_name == "microsoft/layoutlmv3-base":
         tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
         processor = AutoProcessor.from_pretrained(model_name, apply_ocr = False)
-
+    elif model_name == "roberta-base":
+        tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True,add_prefix_space = True)
+        processor = None 
+    
     else:
         tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
         processor = None
